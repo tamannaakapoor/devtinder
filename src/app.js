@@ -5,6 +5,14 @@ const {auth} =require('./middlewares/auth.js');
 //     console.log("successfully");
 //     res.send("loggined successfully");
 // })
+//app.use("route",rh1,[rh2,rh3],rh4) wrapping multiple functions
+app.use("/hello",(req,res,next)=>{
+    console.log("hello1");
+    next();
+},(req,res,next)=>{
+    console.log("hello2");
+    res.send("2nd hey");
+})
 app.get("/obj/:userid/:pw/:name",(req,res)=>{
     console.log(req.params);
     res.send({
