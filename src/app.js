@@ -1,10 +1,11 @@
 const express=require('express');
 const app=express();
-const {auth} =require('./middlewares/auth.js');
+const {auth,objauth} =require('./middlewares/auth.js');
 // app.use("/obj",auth,(req,res)=>{
 //     console.log("successfully");
 //     res.send("loggined successfully");
 // })
+
 //app.use("route",rh1,[rh2,rh3],rh4) wrapping multiple functions
 app.use("/hello",(req,res,next)=>{
     console.log("hello1");
@@ -13,6 +14,7 @@ app.use("/hello",(req,res,next)=>{
     console.log("hello2");
     res.send("2nd hey");
 })
+
 app.get("/obj/:userid/:pw/:name",(req,res)=>{
     console.log(req.params);
     res.send({
@@ -21,6 +23,12 @@ app.get("/obj/:userid/:pw/:name",(req,res)=>{
 })
 app.get("/obj",(req,res)=>{
     console.log(req.query);
+    res.send({
+        "name":"tamanna",
+    "city":"varanasi"})
+})
+app.get("/obj",objauth,(req,res)=>{
+    console.log("object auth");
     res.send({
         "name":"tamanna",
     "city":"varanasi"})
